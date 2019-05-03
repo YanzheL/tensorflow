@@ -172,7 +172,7 @@ class WriteRawProtoSummaryOp : public OpKernel {
     // concatenating all the Value entries together into a single Event.
     const auto summary_pbs = t->flat<string>();
     for (int i = 0; i < summary_pbs.size(); ++i) {
-      if (!event->mutable_summary()->MergeFromString(summary_pbs(i))) {
+      if (!event->mutable_summary()->ParseFromString(summary_pbs(i))) {
         ctx->CtxFailureWithWarning(errors::DataLoss(
             "Bad tf.compat.v1.Summary binary proto tensor string at index ",
             i));

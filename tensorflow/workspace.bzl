@@ -373,11 +373,11 @@ def tf_workspace(path_prefix = "", tf_repo_name = ""):
 
     # 5902e759108d14ee8e6b0b07653dac2f4e70ac73 is based on 3.7.1 with a fix for BUILD file.
     PROTOBUF_URLS = [
-        "http://mirror.tensorflow.org/github.com/protocolbuffers/protobuf/archive/5902e759108d14ee8e6b0b07653dac2f4e70ac73.tar.gz",
-        "https://github.com/protocolbuffers/protobuf/archive/5902e759108d14ee8e6b0b07653dac2f4e70ac73.tar.gz",
+        "https://mirror.bazel.build/github.com/protocolbuffers/protobuf/archive/v3.6.1.3.tar.gz",
+        "https://github.com/protocolbuffers/protobuf/archive/v3.6.1.3.tar.gz",
     ]
-    PROTOBUF_SHA256 = "1c020fafc84acd235ec81c6aac22d73f23e85a700871466052ff231d69c1b17a"
-    PROTOBUF_STRIP_PREFIX = "protobuf-5902e759108d14ee8e6b0b07653dac2f4e70ac73"
+    PROTOBUF_SHA256 = "73fdad358857e120fd0fa19e071a96e15c0f23bb25f85d3f7009abfd4f264a2a"
+    PROTOBUF_STRIP_PREFIX = "protobuf-3.6.1.3"
 
     tf_http_archive(
         name = "protobuf_archive",
@@ -388,6 +388,7 @@ def tf_workspace(path_prefix = "", tf_repo_name = ""):
             "//third_party/systemlibs:protobuf.bzl": "protobuf.bzl",
         },
         urls = PROTOBUF_URLS,
+        patch_file = clean_dep("//third_party:protobuf_temp_fix_cuda10.1.patch"),
     )
 
     # We need to import the protobuf library under the names com_google_protobuf
@@ -402,6 +403,7 @@ def tf_workspace(path_prefix = "", tf_repo_name = ""):
             "//third_party/systemlibs:protobuf.bzl": "protobuf.bzl",
         },
         urls = PROTOBUF_URLS,
+        patch_file = clean_dep("//third_party:protobuf_temp_fix_cuda10.1.patch"),
     )
 
     tf_http_archive(
@@ -413,6 +415,7 @@ def tf_workspace(path_prefix = "", tf_repo_name = ""):
             "//third_party/systemlibs:protobuf.bzl": "protobuf.bzl",
         },
         urls = PROTOBUF_URLS,
+        patch_file = clean_dep("//third_party:protobuf_temp_fix_cuda10.1.patch"),
     )
 
     tf_http_archive(
